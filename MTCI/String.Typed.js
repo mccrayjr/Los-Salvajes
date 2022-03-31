@@ -34,8 +34,46 @@ const typedStr = (str1, str2) => {
   }
 }
 
-const typedStr = (str1, str2) => {
+const typedStrOpt = (str1, str2) => {
+let p1 = str1.length -1
+let p2 = str2.length - 1
 
+while(p1 >= 0 || p2 >= 0){
+  if(str1[p1] === "#" || str2[p2] === "#"){
+    if(str1[p1] === "#"){
+      let backspace = 2;
+      //vv handles backspaces and multiple
+      while(backspace > 0){
+        p1--
+        backspace--
+        if(str1[p1] === "#"){
+          backspace += 2
+        }
+      }
+    }
+    if(str2[p2] === "#"){
+      let backspace = 2;
+      //vv handles backspaces and multiple
+      while(backspace > 0){
+        p2--
+        backspace--
+        if(str2[p2] === "#"){
+          backspace += 2
+        }
+      }
+    }
+  } else {
+    if(str2[p2] !== str1[p1]){
+      return false
+    } else{
+      p1--
+      p2--
+    }
+  }
+}
+return true
 }
 
-console.log(typedStr("ab#c", "ad#c"))
+
+
+console.log(typedStrOpt("ab#c", "ab##c"))
