@@ -20,8 +20,8 @@ const longestSub = (str) => {
   let memo = {}
 
   while(p1 < str.length - maxLength){
-    memo[str[p1]] = true
-    if(memo[str[p2]]){
+    memo[str[p1]] = p1
+    if(memo[str[p2]] === ){
       memo = {}
       p1++
       p2 = p1 + 1
@@ -36,5 +36,28 @@ const longestSub = (str) => {
   }
   return maxLength
 }
+
+let testTwo = "abccabb"
+
+const longestSubOpt = (string) => {
+  if(str.length <= 1){
+    return str.length
+}
+
+  let left = 0
+  let longest = 0
+  let seenChars = {}
+  for(let right = 0; right < string.length; right++){ //right needs to iterate through rest of st
+    const currentChar = string[right] //character getting from string
+    const prevSeenChar = seenChars[currentChar] //is the above character already in the map; if so returns index if not return undefined 
+    if(prevSeenChar >= left){  // is the previously seen index is greater than the right, it's a duplicate
+      left = prevSeenChar + 1 //new position to where we'll start checking unique substring
+    }
+    seenChars[currentChar] = right //updating the index of that character to current right index
+    longest = Math.max(longest, right -left + 1)
+  }
+  return longest
+}
+
 
 console.log(longestSub(test))
